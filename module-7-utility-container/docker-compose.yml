@@ -1,0 +1,9 @@
+services:
+  node-util:
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/app
+    stdin_open: true
+    tty: true
