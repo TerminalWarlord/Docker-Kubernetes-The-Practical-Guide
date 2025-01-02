@@ -5,7 +5,6 @@ const app = express();
 app.get('/', (req, res) => {
   res.send(`
     <h1>Hello from this NodeJS app!</h1>
-    <p>It is running on port 8001</p>
     <p>Try sending a request to /error and see what happens</p>
   `);
 });
@@ -14,4 +13,4 @@ app.get('/error', (req, res) => {
   process.exit(1);
 });
 
-app.listen(8001);
+app.listen(8080);
