@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: story-app-deployment
+    
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: story-app-kube
+  template:
+    metadata:
+      labels:
+        app: story-app-kube
+    spec:
+      containers:
+        - name: story-app-kube
+          image: terminalwarlord/story-app-kube
+          imagePullPolicy: Always
+          env:
+            - name: STORY_FOLDER
+              # value: 'story'
+              valueFrom:
+                configMapKeyRef:
+                  name: data-store-env
+                  key: folder
+          volumeMounts:
+            - mountPath: /app/story
+              name: story-app-kube-volume
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+            requests:
+              cpu: "250m"
+              memory: "256Mi"
+      volumes:
+        - name: story-app-kube-volume
+          # emptyDir: {}
+          # hostPath:
+          #   path: /data
+          #   type: DirectoryOrCreate
+          persistentVolumeClaim:
+            claimName: host-pvc
+
