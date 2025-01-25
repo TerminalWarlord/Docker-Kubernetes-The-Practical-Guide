@@ -17,6 +17,5 @@ spec:
           image: terminalwarlord/kub-demo-user:latest
           env:
             - name: AUTH_ADDRESS
-              value: localhost
-        - name: auth
-          image: terminalwarlord/kub-demo-auth:latest
+              # value: "10.109.135.85" # using ClusterIP
+              value: "auth-service.default"
